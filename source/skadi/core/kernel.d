@@ -1,18 +1,18 @@
 module skadi.core.kernel;
 
+import vibe.d;
 import skadi.core.container;
+import skadi.core.router;
+import skadi.utils.dynamic;
 import std.functional;
 import std.typetuple;
 import std.stdio;
 import std.file;
 import std.format;
-import vibe.d;
-import skadi.core.router;
-import utils.typetupleof;
 import std.traits;
 import config.namespaces;
 import config.config;
-import Application.PostBundle.Services.PostManager;
+import config.container;
 
 
 final class Kernel
@@ -30,12 +30,17 @@ final class Kernel
 
 	void buildContainer()
 	{
-		MongoClient client;
-		client = connectMongoDB("127.0.0.1");
-
 		auto containerIoc = Container.getInstance();
-		containerIoc.register!(MongoClient).existingInstance(client);
-		containerIoc.register!PostManager;
+		foreach(Service s; TypeTupleOf!services) {
+		    mixin(format(
+		        q{
+		            import %s;
+		            containerIoc.register!(%s);
+		        },
+		        s.path,
+		        s.className
+		    ));
+		}
 	}
 
 	URLRouter buildRouter()
