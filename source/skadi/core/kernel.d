@@ -62,28 +62,28 @@ final class Kernel
 						q {
 							import Application.%s.Controller.%s;
 							router.registerWebInterface(new %s(), webSettings);
+					 	},
+							i.bundle,
+							controller.name,
+							controller.name,
+							));
+					}
+					else
+					{
+						mixin(format(
+						q {
+							import Application.%s.Controller.%s;
+							router.registerWebInterface(new %s());
 							},
 							i.bundle,
 							controller.name,
 							controller.name,
 							));
-						}
-						else
-						{
-							mixin(format(
-							q {
-								import Application.%s.Controller.%s;
-								router.registerWebInterface(new %s());
-								},
-								i.bundle,
-								controller.name,
-								controller.name,
-								));
-							}
-						}
 					}
 				}
-				return router;
 			}
-
 		}
+		return router;
+	}
+
+}
