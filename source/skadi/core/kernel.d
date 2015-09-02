@@ -9,15 +9,11 @@ import std.format;
 import vibe.d;
 import skadi.core.router;
 import utils.typetupleof;
-import Application.PostBundle.Services.PostManager;
+import std.traits;
 import config.namespaces;
 import config.config;
-import std.traits;
+import Application.PostBundle.Services.PostManager;
 
-void errorPage(HTTPServerRequest req, HTTPServerResponse res, HTTPServerErrorInfo error)
-{
-	res.render!("error.dt", req, error);
-}
 
 final class Kernel
 {
@@ -48,42 +44,47 @@ final class Kernel
 		auto settings = new HTTPServerSettings;
 		auto webSettings = new WebInterfaceSettings;
 
-		foreach(Namespace i; TypeTupleOf!namespaces)
-		{
-			if (i.controllers !is null)
-			{
+		foreach(Namespace i; TypeTupleOf!namespaces) {
+
+			if (i.controllers !is null) {
 				enum Controller [] controllers = i.controllers;
+
 				foreach(Controller controller; TypeTupleOf!controllers)
 				{
-					if (controller.prefix)
-					{
+					if (controller.prefix) {
 						webSettings.urlPrefix = controller.prefix;
 						mixin(format(
-						q {
-							import Application.%s.Controller.%s;
-							router.registerWebInterface(new %s(), webSettings);
-					 	},
+							q{
+								import Application.%s.Controller.%s;
+								router.registerWebInterface(new %s(), webSettings);
+						 	},
 							i.bundle,
 							controller.name,
 							controller.name,
-							));
-					}
-					else
-					{
+						));
+					} else {
 						mixin(format(
-						q {
-							import Application.%s.Controller.%s;
-							router.registerWebInterface(new %s());
+							q{
+								import Application.%s.Controller.%s;
+								router.registerWebInterface(new %s());
 							},
 							i.bundle,
 							controller.name,
 							controller.name,
-							));
+						));
 					}
 				}
+
 			}
+
 		}
+
 		return router;
 	}
 
+}
+
+void errorPage(HTTPServerRequest req, HTTPServerResponse res, HTTPServerErrorInfo error)
+{
+	res.render!("error.dt", req, error);
 }
