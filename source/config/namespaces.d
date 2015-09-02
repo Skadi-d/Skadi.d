@@ -1,6 +1,6 @@
 module config.namespaces;
 
-public import skadi.core.namespaces;
+import skadi.framework;
 
 enum Namespace[] namespaces = [
     Namespace("PostBundle", [

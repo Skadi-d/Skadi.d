@@ -4,7 +4,6 @@ public import poodinis;
 alias Container = DependencyContainer;
 
 import std.string;
-import std.stdio;
 import std.array;
 
 struct Service

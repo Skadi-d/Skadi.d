@@ -1,6 +1,6 @@
 module Application.PostBundle.Services.MongoService;
 
-import vibe.d;
+import skadi.framework;
 
 class MongoService
 {

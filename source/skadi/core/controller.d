@@ -2,7 +2,7 @@ module skadi.core.controller;
 
 import skadi.core.container;
 
-abstract class Controller
+abstract class SkadiController
 {
     this ()
     {

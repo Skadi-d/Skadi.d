@@ -1,9 +1,7 @@
 module Application.PostBundle.Services.PostManager;
 
-import skadi.core.container;
 import Application.PostBundle.Services.MongoService;
-import std.stdio;
-import vibe.d;
+import skadi.framework;
 
 class PostManager
 {

@@ -1,12 +1,9 @@
 module Application.PostBundle.Controller.PostController;
 
-import vibe.d;
-import std.stdio;
-import skadi.core.container;
 import Application.PostBundle.Services.PostManager;
-import skadi.core.controller;
+import skadi.framework;
 
-class PostController : Controller
+class PostController : SkadiController
 {
 	this ()
 	{

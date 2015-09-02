@@ -1,4 +1,4 @@
-import skadi.core.kernel;
+import skadi.framework;
 
 import std.stdio;
 import std.array;
