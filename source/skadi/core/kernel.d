@@ -67,7 +67,6 @@ final class Kernel
 							controller.name,
 							controller.name,
 						));
-
 					}
 					else
 					{
