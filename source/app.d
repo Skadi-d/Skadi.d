@@ -1,4 +1,4 @@
-import core.kernel;
+import skadi.core.kernel;
 
 shared static this()
 {
