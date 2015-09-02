@@ -21,72 +21,70 @@ void errorPage(HTTPServerRequest req, HTTPServerResponse res, HTTPServerErrorInf
 
 final class Kernel
 {
-
-URLRouter buildRouter()
-{
-	auto router = new URLRouter;
-	auto settings = new HTTPServerSettings;
-	auto webSettings = new WebInterfaceSettings;
-
-	foreach(Namespace i; TypeTupleOf!namespaces)
+	void boot()
 	{
-		if (i.controllers !is null)
-		{
-			enum Controller [] controllers = i.controllers;
-			foreach(Controller controller; TypeTupleOf!controllers)
-			{
-				if (controller.prefix)
-				{
-					webSettings.urlPrefix = controller.prefix;
-					mixin(format(
-					          q {
-							import Application.%s.Controller.%s;
-							router.registerWebInterface(new %s(), webSettings);
-						},
-					          i.bundle,
-					          controller.name,
-					          controller.name,
-					          ));
+		this.buildContainer();
 
-				}
-				else
+		auto settings = new HTTPServerSettings;
+		settings.errorPageHandler = toDelegate(&errorPage);
+		settings.port = port;
+
+		listenHTTP(settings, this.buildRouter());
+	}
+
+	void buildContainer()
+	{
+		MongoClient client;
+		client = connectMongoDB("127.0.0.1");
+
+		auto containerIoc = Container.getInstance();
+		containerIoc.register!(MongoClient).existingInstance(client);
+		containerIoc.register!PostManager;
+	}
+
+	URLRouter buildRouter()
+	{
+		auto router = new URLRouter;
+		auto settings = new HTTPServerSettings;
+		auto webSettings = new WebInterfaceSettings;
+
+		foreach(Namespace i; TypeTupleOf!namespaces)
+		{
+			if (i.controllers !is null)
+			{
+				enum Controller [] controllers = i.controllers;
+				foreach(Controller controller; TypeTupleOf!controllers)
 				{
-					mixin(format(
-					          q {
+					if (controller.prefix)
+					{
+						webSettings.urlPrefix = controller.prefix;
+						mixin(format(
+							q {
+								import Application.%s.Controller.%s;
+								router.registerWebInterface(new %s(), webSettings);
+							},
+							i.bundle,
+							controller.name,
+							controller.name,
+						));
+
+					}
+					else
+					{
+						mixin(format(
+						q {
 							import Application.%s.Controller.%s;
 							router.registerWebInterface(new %s());
 						},
-					          i.bundle,
-					          controller.name,
-					          controller.name,
-					          ));
+						i.bundle,
+						controller.name,
+						controller.name,
+						));
+					}
 				}
 			}
 		}
+		return router;
 	}
-
-	return router;
-}
-
-void boot()
-{
-	this.buildContainer();
-
-	auto settings = new HTTPServerSettings;
-	settings.errorPageHandler = toDelegate(&errorPage);
-	settings.port = port;
-
-	listenHTTP(settings, this.buildRouter());
-}
-
-void buildContainer()
-{
-	MongoClient client;
-	client = connectMongoDB("127.0.0.1");
-
-	auto containerIoc = Container.getInstance();
-	containerIoc.register!(MongoClient).existingInstance(client);
-	containerIoc.register!PostManager;
-}
 
 }
