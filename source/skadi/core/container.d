@@ -1,7 +1,6 @@
 module skadi.core.container;
 
-public import poodinis;
-alias Container = DependencyContainer;
+public import skadi.container.container;
 
 import std.string;
 import std.array;

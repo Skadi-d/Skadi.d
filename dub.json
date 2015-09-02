@@ -5,7 +5,6 @@
 	"authors": ["faianca"],
 	"dependencies": {
 		"vibe-d": "~>0.7.19",
-		"poodinis": "~>4.0.0",
 		"dyaml": "~>0.5.2"
 	},
 	"versions": ["VibeDefaultMain"]
