@@ -22,21 +22,21 @@ class PostController : Controller
 
 	@path("/fodasse")
 	void getFodasse(HTTPServerRequest req, HTTPServerResponse res)
-    {
+	{
 		res.writeJsonBody("SADSADASD");
-    }
+	}
 
-    Json getPost()
-    {
+	Json getPost()
+	{
 		return postManager.getPost();
-    }
+	}
 
 	@path("/name/:name")
-    Json getPost(HTTPServerRequest req, HTTPServerResponse res)
-    {
+	Json getPost(HTTPServerRequest req, HTTPServerResponse res)
+	{
 		auto name = req.params["name"];
 		return postManager.getPost(name);
-    }
+	}
 
 private:
     PostManager postManager;

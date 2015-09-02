@@ -1,7 +1,7 @@
 module Application.PostBundle.Services.PostManager;
 
 import vibe.d;
-import poodinis;
+import skadi.core.container;
 import std.stdio;
 
 class PostManager
