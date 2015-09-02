@@ -22,66 +22,71 @@ void errorPage(HTTPServerRequest req, HTTPServerResponse res, HTTPServerErrorInf
 final class Kernel
 {
 
-	URLRouter buildRouter()
+URLRouter buildRouter()
+{
+	auto router = new URLRouter;
+	auto settings = new HTTPServerSettings;
+	auto webSettings = new WebInterfaceSettings;
+
+	foreach(Namespace i; TypeTupleOf!namespaces)
 	{
-		auto router = new URLRouter;
-		auto settings = new HTTPServerSettings;
-		auto webSettings = new WebInterfaceSettings;
+		if (i.controllers !is null)
+		{
+			enum Controller [] controllers = i.controllers;
+			foreach(Controller controller; TypeTupleOf!controllers)
+			{
+				if (controller.prefix)
+				{
+					webSettings.urlPrefix = controller.prefix;
+					mixin(format(
+					          q {
+							import Application.%s.Controller.%s;
+							router.registerWebInterface(new %s(), webSettings);
+						},
+					          i.bundle,
+					          controller.name,
+					          controller.name,
+					          ));
 
-        foreach(Namespace i; TypeTupleOf!namespaces)
-        {
-			if (i.controllers !is null) {
-				enum Controller[] controllers = i.controllers;
-				foreach(Controller controller; TypeTupleOf!controllers) {
-					if (controller.prefix) {
-						webSettings.urlPrefix = controller.prefix;
-						mixin(format(
-							q{
-								import Application.%s.Controller.%s;
-								router.registerWebInterface(new %s(), webSettings);
-							},
-							i.bundle,
-							controller.name,
-							controller.name,
-						));
-
-					} else {
-						mixin(format(
-							q{
-								import Application.%s.Controller.%s;
-								router.registerWebInterface(new %s());
-							},
-							i.bundle,
-							controller.name,
-							controller.name,
-						));
-					}
+				}
+				else
+				{
+					mixin(format(
+					          q {
+							import Application.%s.Controller.%s;
+							router.registerWebInterface(new %s());
+						},
+					          i.bundle,
+					          controller.name,
+					          controller.name,
+					          ));
 				}
 			}
-        }
-
-		return router;
+		}
 	}
 
-    void boot()
-    {
-		this.buildContainer();
+	return router;
+}
 
-    	auto settings = new HTTPServerSettings;
-    	settings.errorPageHandler = toDelegate(&errorPage);
-    	settings.port = port;
+void boot()
+{
+	this.buildContainer();
 
-    	listenHTTP(settings, this.buildRouter());
-    }
+	auto settings = new HTTPServerSettings;
+	settings.errorPageHandler = toDelegate(&errorPage);
+	settings.port = port;
 
-	void buildContainer()
-    {
-        MongoClient client;
-        client = connectMongoDB("127.0.0.1");
+	listenHTTP(settings, this.buildRouter());
+}
 
-        auto containerIoc = Container.getInstance();
-        containerIoc.register!(MongoClient).existingInstance(client);
-        containerIoc.register!PostManager;
-    }
+void buildContainer()
+{
+	MongoClient client;
+	client = connectMongoDB("127.0.0.1");
+
+	auto containerIoc = Container.getInstance();
+	containerIoc.register!(MongoClient).existingInstance(client);
+	containerIoc.register!PostManager;
+}
 
 }
