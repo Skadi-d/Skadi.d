@@ -87,7 +87,6 @@ final class Kernel
 
 		return router;
 	}
-
 }
 
 void errorPage(HTTPServerRequest req, HTTPServerResponse res, HTTPServerErrorInfo error)

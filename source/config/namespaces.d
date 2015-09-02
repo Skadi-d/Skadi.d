@@ -4,6 +4,6 @@ import skadi.framework;
 
 enum Namespace[] namespaces = [
     Namespace("PostBundle", [
-        Controller("PostController", "/post")
+        Controller("PostController", "/miguel")
     ]),
 ];
