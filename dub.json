@@ -1,11 +1,11 @@
 {
 	"name": "skadiweb",
-	"description": "Skadi MVC Web Framework D language.",
+	"description": "Skadi.d MVC Web Framework D language.",
 	"copyright": "Copyright © 2015, faianca",
 	"authors": ["faianca"],
 	"dependencies": {
-		"vibe-d": "~>0.7.19",
-		"dyaml": "~>0.5.2"
+		"vibe-d": "~>0.7.19"
 	},
+	"copyFiles": ["source/skadi/examples"],
 	"versions": ["VibeDefaultMain"]
 }

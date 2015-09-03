@@ -14,7 +14,7 @@ class PostController : SkadiController
 	@path("/")
 	void index()
 	{
-		render!("index.dt");
+		//render!("index.dt");
 	}
 
 	@path("/fodasse")
