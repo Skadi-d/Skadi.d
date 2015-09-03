@@ -7,6 +7,5 @@
 	"dependencies": {
 		"vibe-d": "~>0.7.19"
 	},
-	"copyFiles": ["source/skadi/examples"],
 	"versions": ["VibeDefaultMain"]
 }
