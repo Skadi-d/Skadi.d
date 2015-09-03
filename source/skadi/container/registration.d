@@ -1,31 +1,38 @@
 module skadi.container.registration;
 
+import skadi.container.interfaces;
+
 debug {
 	import std.stdio;
 	import std.string;
 }
 
-class Registration {
+class Registration
+{
 	private TypeInfo _registeredType = null;
 	private TypeInfo_Class _instantiatableType = null;
 	private Registration linkedRegistration;
 
-	public @property registeredType() {
+	public @property registeredType()
+	{
 		return _registeredType;
 	}
 
-	public @property instantiatableType() {
+	public @property instantiatableType()
+	{
 		return _instantiatableType;
 	}
 
 	public CreationScope registationScope = null;
 
-	this(TypeInfo registeredType, TypeInfo_Class instantiatableType) {
+	this(TypeInfo registeredType, TypeInfo_Class instantiatableType)
+	{
 		this._registeredType = registeredType;
 		this._instantiatableType = instantiatableType;
 	}
 
-	public Object getInstance(InstantiationContext context = new InstantiationContext()) {
+	public Object getInstance(InstantiationContext context = new InstantiationContext())
+	{
 		if (linkedRegistration !is null) {
 			return linkedRegistration.getInstance(context);
 		}
@@ -38,24 +45,25 @@ class Registration {
 		return registationScope.getInstance();
 	}
 
-	public Registration linkTo(Registration registration) {
+	public Registration linkTo(Registration registration)
+	{
 		this.linkedRegistration = registration;
 		return this;
 	}
 }
 
-class NoScopeDefinedException : Exception {
+class NoScopeDefinedException : Exception
+{
 	this(TypeInfo type) {
 		super("No scope defined for registration of type " ~ type.toString());
 	}
 }
 
-interface CreationScope {
-	public Object getInstance();
-}
 
-class NullScope : CreationScope {
-	public Object getInstance() {
+class NullScope : CreationScope
+{
+	public Object getInstance()
+	{
 		debug(poodinisVerbose) {
 			writeln("DEBUG: No instance created (NullScope)");
 		}
@@ -63,7 +71,8 @@ class NullScope : CreationScope {
 	}
 }
 
-class SingleInstanceScope : CreationScope {
+class SingleInstanceScope : CreationScope
+{
 	TypeInfo_Class instantiatableType = null;
 	Object instance = null;
 
@@ -71,7 +80,8 @@ class SingleInstanceScope : CreationScope {
 		this.instantiatableType = instantiatableType;
 	}
 
-	public Object getInstance() {
+	public Object getInstance()
+	{
 		if (instance is null) {
 			debug(poodinisVerbose) {
 				writeln(format("DEBUG: Creating new instance of type %s (SingleInstanceScope)", instantiatableType.toString()));
@@ -93,12 +103,14 @@ class SingleInstanceScope : CreationScope {
  *
  * Effectively makes the given registration a singleton.
  */
-public Registration singleInstance(Registration registration) {
+public Registration singleInstance(Registration registration)
+{
 	registration.registationScope = new SingleInstanceScope(registration.instantiatableType);
 	return registration;
 }
 
-class NewInstanceScope : CreationScope {
+class NewInstanceScope : CreationScope
+{
 	TypeInfo_Class instantiatableType = null;
 
 	this(TypeInfo_Class instantiatableType) {
@@ -116,12 +128,14 @@ class NewInstanceScope : CreationScope {
 /**
  * Scopes registrations to return a new instance every time the given registration is resolved.
  */
-public Registration newInstance(Registration registration) {
+public Registration newInstance(Registration registration)
+{
 	registration.registationScope = new NewInstanceScope(registration.instantiatableType);
 	return registration;
 }
 
-class ExistingInstanceScope : CreationScope {
+class ExistingInstanceScope : CreationScope
+{
 	Object instance = null;
 
 	this(Object instance) {
@@ -139,12 +153,14 @@ class ExistingInstanceScope : CreationScope {
 /**
  * Scopes registrations to return the given instance every time the given registration is resolved.
  */
-public Registration existingInstance(Registration registration, Object instance) {
+public Registration existingInstance(Registration registration, Object instance)
+{
 	registration.registationScope = new ExistingInstanceScope(instance);
 	return registration;
 }
 
-public string toConcreteTypeListString(Registration[] registrations) {
+public string toConcreteTypeListString(Registration[] registrations)
+{
 	auto concreteTypeListString = "";
 	foreach (registration ; registrations) {
 		if (concreteTypeListString.length > 0) {
