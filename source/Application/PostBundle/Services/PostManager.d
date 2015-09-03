@@ -3,6 +3,7 @@ module Application.PostBundle.Services.PostManager;
 import Application.PostBundle.Services.MongoService;
 import Application.PostBundle.Services.TestService;
 import skadi.framework;
+import std.stdio;
 
 class PostManager
 {
