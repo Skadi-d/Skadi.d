@@ -14,7 +14,8 @@ class PostController : SkadiController
 	@path("/")
 	void index()
 	{
-		render!("index.dt");
+		string author = "Miguel Ferreira";
+		render!("index.dt", author);
 	}
 
 	@path("/fodasse")

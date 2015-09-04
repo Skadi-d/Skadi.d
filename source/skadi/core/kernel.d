@@ -28,6 +28,7 @@ final class Kernel
 		this.buildContainer();
 
 		auto settings = new HTTPServerSettings;
+		settings.bindAddresses = ["::1", "0.0.0.0"];
 		settings.errorPageHandler = toDelegate(&errorPage);
 		settings.port = port;
 
@@ -52,6 +53,8 @@ final class Kernel
 	URLRouter buildRouter()
 	{
 		auto router = new URLRouter;
+		router.get("*", serveStaticFiles("./public/"));
+
 		auto settings = new HTTPServerSettings;
 		auto webSettings = new WebInterfaceSettings;
 

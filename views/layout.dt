@@ -1,6 +1,304 @@
 doctype html
-html
-	head
-		title Skadi Framework
-	body
-		block body
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    title Home | Triangle
+    link(href='css/bootstrap.min.css', rel='stylesheet')
+    link(href='css/font-awesome.min.css', rel='stylesheet')
+    link(href='css/animate.min.css', rel='stylesheet')
+    link(href='css/lightbox.css', rel='stylesheet')
+    link(href='css/main.css', rel='stylesheet')
+    link(href='css/responsive.css', rel='stylesheet')
+    //if lt IE 9
+      script(src='js/html5shiv.js')
+      script(src='js/respond.min.js')
+    link(rel='shortcut icon', href='images/ico/favicon.ico')
+    link(rel='apple-touch-icon-precomposed', sizes='144x144', href='images/ico/apple-touch-icon-144-precomposed.png')
+    link(rel='apple-touch-icon-precomposed', sizes='114x114', href='images/ico/apple-touch-icon-114-precomposed.png')
+    link(rel='apple-touch-icon-precomposed', sizes='72x72', href='images/ico/apple-touch-icon-72-precomposed.png')
+    link(rel='apple-touch-icon-precomposed', href='images/ico/apple-touch-icon-57-precomposed.png')
+  // /head
+  body
+    header#header
+      .container
+        .row
+          .col-sm-12.overflow
+            .social-icons.pull-right
+              ul.nav.nav-pills
+                li
+                  a(href='')
+                    i.fa.fa-facebook
+                li
+                  a(href='')
+                    i.fa.fa-twitter
+                li
+                  a(href='')
+                    i.fa.fa-google-plus
+                li
+                  a(href='')
+                    i.fa.fa-dribbble
+                li
+                  a(href='')
+                    i.fa.fa-linkedin
+      .navbar.navbar-inverse(role='banner')
+        .container
+          .navbar-header
+            button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+              span.sr-only Toggle navigation
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+            a.navbar-brand(href='/')
+              h1
+                img(src='images/logo.png', alt='logo')
+          .collapse.navbar-collapse
+            ul.nav.navbar-nav.navbar-right
+              li.active
+                a(href='/') Home
+              li.dropdown
+                a(href='#')
+                  | Pages
+                  i.fa.fa-angle-down
+                ul.sub-menu(role='menu')
+                  li
+                    a(href='aboutus.html') About
+                  li
+                    a(href='aboutus2.html') About 2
+                  li
+                    a(href='service.html') Services
+                  li
+                    a(href='pricing.html') Pricing
+                  li
+                    a(href='contact.html') Contact us
+                  li
+                    a(href='contact2.html') Contact us 2
+                  li
+                    a(href='404.html') 404 error
+                  li
+                    a(href='coming-soon.html') Coming Soon
+              li.dropdown
+                a(href='blog.html')
+                  | Blog
+                  i.fa.fa-angle-down
+                ul.sub-menu(role='menu')
+                  li
+                    a(href='blog.html') Blog Default
+                  li
+                    a(href='blogtwo.html') Timeline Blog
+                  li
+                    a(href='blogone.html') 2 Columns + Right Sidebar
+                  li
+                    a(href='blogthree.html') 1 Column + Left Sidebar
+                  li
+                    a(href='blogfour.html') Blog Masonary
+                  li
+                    a(href='blogdetails.html') Blog Details
+              li.dropdown
+                a(href='portfolio.html')
+                  | Portfolio
+                  i.fa.fa-angle-down
+                ul.sub-menu(role='menu')
+                  li
+                    a(href='portfolio.html') Portfolio Default
+                  li
+                    a(href='portfoliofour.html') Isotope 3 Columns + Right Sidebar
+                  li
+                    a(href='portfolioone.html') 3 Columns + Right Sidebar
+                  li
+                    a(href='portfoliotwo.html') 3 Columns + Left Sidebar
+                  li
+                    a(href='portfoliothree.html') 2 Columns
+                  li
+                    a(href='portfolio-details.html') Portfolio Details
+              li
+                a(href='shortcodes.html ') Shortcodes
+          .search
+            form(role='form')
+              i.fa.fa-search
+              .field-toggle
+                input.search-form(type='text', autocomplete='off', placeholder='Search')
+    // /#header
+    section#home-slider
+      .container
+        .row
+          .main-slider
+            .slide-text
+              h1 We Are Creative Nerds
+              p
+                | Boudin doner frankfurter pig. Cow shank bresaola pork loin tri-tip tongue venison pork belly meatloaf short loin landjaeger biltong beef ribs shankle chicken andouille.
+              a.btn.btn-common(href='#') SIGN UP
+            img.slider-hill(src='images/home/slider/hill.png', alt='slider image')
+            img.slider-house(src='images/home/slider/house.png', alt='slider image')
+            img.slider-sun(src='images/home/slider/sun.png', alt='slider image')
+            img.slider-birds1(src='images/home/slider/birds1.png', alt='slider image')
+            img.slider-birds2(src='images/home/slider/birds2.png', alt='slider image')
+      .preloader
+        i.fa.fa-sun-o.fa-spin
+    // /#home-slider
+    section#services
+      .container
+        .row
+          .col-sm-4.text-center.padding.wow.fadeIn(data-wow-duration='1000ms', data-wow-delay='300ms')
+            .single-service
+              .wow.scaleIn(data-wow-duration='500ms', data-wow-delay='300ms')
+                img(src='images/home/icon1.png', alt='')
+              h2 Incredibly Responsive
+              p
+                | Ground round tenderloin flank shank ribeye. Hamkevin meatball swine. Cow shankle beef sirloin chicken ground round.
+          .col-sm-4.text-center.padding.wow.fadeIn(data-wow-duration='1000ms', data-wow-delay='600ms')
+            .single-service
+              .wow.scaleIn(data-wow-duration='500ms', data-wow-delay='600ms')
+                img(src='images/home/icon2.png', alt='')
+              h2 Superior Typography
+              p
+                | Hamburger ribeye drumstick turkey, strip steak sausage ground round shank pastrami beef brisket pancetta venison.
+          .col-sm-4.text-center.padding.wow.fadeIn(data-wow-duration='1000ms', data-wow-delay='900ms')
+            .single-service
+              .wow.scaleIn(data-wow-duration='500ms', data-wow-delay='900ms')
+                img(src='images/home/icon3.png', alt='')
+              h2 Swift Page Builder
+              p
+                | Venison tongue, salami corned beef ball tip meatloaf bacon. Fatback pork belly bresaola tenderloin bone pork kevin shankle.
+    // /#services
+    section#action.responsive
+      .vertical-center
+        .container
+          .row
+            .action.take-tour
+              .col-sm-7.wow.fadeInLeft(data-wow-duration='500ms', data-wow-delay='300ms')
+                h1.title Triangle Corporate Template
+                p A responsive, retina-ready & wide multipurpose template.
+              .col-sm-5.text-center.wow.fadeInRight(data-wow-duration='500ms', data-wow-delay='300ms')
+                .tour-button
+                  a.btn.btn-common(href='#') TAKE THE TOUR
+    // /#action
+    section#features
+      .container
+        .row
+          .single-features
+            .col-sm-5.wow.fadeInLeft(data-wow-duration='500ms', data-wow-delay='300ms')
+              img.img-responsive(src='images/home/image1.png', alt='')
+            .col-sm-6.wow.fadeInRight(data-wow-duration='500ms', data-wow-delay='300ms')
+              h2 Experienced and Enthusiastic
+              p
+                | Pork belly leberkas cow short ribs capicola pork loin. Doner fatback frankfurter jerky meatball pastrami bacon tail sausage. Turkey fatback ball tip, tri-tip tenderloin drumstick salami strip steak.
+          .single-features
+            .col-sm-6.col-sm-offset-1.align-right.wow.fadeInLeft(data-wow-duration='500ms', data-wow-delay='300ms')
+              h2 Built for the Responsive Web
+              p
+                | Mollit eiusmod id chuck turducken laboris meatloaf pork loin tenderloin swine. Pancetta excepteur fugiat strip steak tri-tip. Swine salami eiusmod sint, ex id venison non. Fugiat ea jowl cillum meatloaf.
+            .col-sm-5.wow.fadeInRight(data-wow-duration='500ms', data-wow-delay='300ms')
+              img.img-responsive(src='images/home/image2.png', alt='')
+          .single-features
+            .col-sm-5.wow.fadeInLeft(data-wow-duration='500ms', data-wow-delay='300ms')
+              img.img-responsive(src='images/home/image3.png', alt='')
+            .col-sm-6.wow.fadeInRight(data-wow-duration='500ms', data-wow-delay='300ms')
+              h2 Experienced and Enthusiastic
+              p
+                | Ut officia cupidatat anim excepteur fugiat cillum ea occaecat rump pork chop tempor. Ut tenderloin veniam commodo. Shankle aliquip short ribs, chicken eiusmod exercitation shank landjaeger spare ribs corned beef.
+    // /#features
+    section#clients
+      .container
+        .row
+          .col-sm-12
+            .clients.text-center.wow.fadeInUp(data-wow-duration='500ms', data-wow-delay='300ms')
+              p
+                img.img-responsive(src='images/home/clients.png', alt='')
+              h1.title Happy Clients
+              p
+                | Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                br
+                |  Ut enim ad minim veniam, quis nostrud
+            .clients-logo.wow.fadeIn(data-wow-duration='1000ms', data-wow-delay='600ms')
+              .col-xs-3.col-sm-2
+                a(href='#')
+                  img.img-responsive(src='images/home/client1.png', alt='')
+              .col-xs-3.col-sm-2
+                a(href='#')
+                  img.img-responsive(src='images/home/client2.png', alt='')
+              .col-xs-3.col-sm-2
+                a(href='#')
+                  img.img-responsive(src='images/home/client3.png', alt='')
+              .col-xs-3.col-sm-2
+                a(href='#')
+                  img.img-responsive(src='images/home/client4.png', alt='')
+              .col-xs-3.col-sm-2
+                a(href='#')
+                  img.img-responsive(src='images/home/client5.png', alt='')
+              .col-xs-3.col-sm-2
+                a(href='#')
+                  img.img-responsive(src='images/home/client6.png', alt='')
+    // /#clients
+    footer#footer
+      .container
+        .row
+          .col-sm-12.text-center.bottom-separator
+            img.img-responsive.inline(src='images/home/under.png', alt='')
+          .col-md-4.col-sm-6
+            .testimonial.bottom
+              h2 Testimonial
+              .media
+                .pull-left
+                  a(href='#')
+                    img(src='images/home/profile1.png', alt='')
+                .media-body
+                  blockquote Nisi commodo bresaola, leberkas venison eiusmod bacon occaecat labore tail.
+                  h3
+                    a(href='#') - Jhon Kalis
+              .media
+                .pull-left
+                  a(href='#')
+                    img(src='images/home/profile2.png', alt='')
+                .media-body
+                  blockquote
+                    | Capicola nisi flank sed minim sunt aliqua rump pancetta leberkas venison eiusmod.
+                  h3
+                    a(href='') - Abraham Josef
+          .col-md-3.col-sm-6
+            .contact-info.bottom
+              h2 Contacts
+              address
+                | E-mail:
+                a(href='mailto:someone@example.com') email@email.com
+                br
+                |                         Phone: +1 (123) 456 7890
+                br
+                |                         Fax: +1 (123) 456 7891
+                br
+              h2 Address
+              address
+                | Unit C2, St.Vincent's Trading Est.,
+                br
+                |                         Feeder Road,
+                br
+                |                         Bristol, BS2 0UY
+                br
+                |                         United Kingdom
+                br
+          .col-md-4.col-sm-12
+            .contact-form.bottom
+              h2 Send a message
+              form#main-contact-form(name='contact-form', method='post', action='sendemail.php')
+                .form-group
+                  input.form-control(type='text', name='name', required='required', placeholder='Name')
+                .form-group
+                  input.form-control(type='email', name='email', required='required', placeholder='Email Id')
+                .form-group
+                  textarea#message.form-control(name='message', required='required', rows='8', placeholder='Your text here')
+                .form-group
+                  input.btn.btn-submit(type='submit', name='submit', value='Submit')
+          .col-sm-12
+            .copyright-text.text-center
+              p © Your Company 2014. All Rights Reserved.
+              p
+                | Designed by
+                a(target='_blank', href='http://www.themeum.com') Themeum
+    // /#footer
+    script(type='text/javascript', src='js/jquery.js')
+    script(type='text/javascript', src='js/bootstrap.min.js')
+    script(type='text/javascript', src='js/lightbox.min.js')
+    script(type='text/javascript', src='js/wow.min.js')
+    script(type='text/javascript', src='js/main.js')
