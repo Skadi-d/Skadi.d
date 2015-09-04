@@ -16,23 +16,34 @@ import config.config;
 import config.namespaces;
 import config.container;
 
-void errorPage(HTTPServerRequest req, HTTPServerResponse res, HTTPServerErrorInfo error)
-{
-	res.render!("error.dt", req, error);
-}
 
 final class Kernel
 {
-	void boot()
+	URLRouter router;
+	HTTPServerSettings settings;
+
+	this ()
 	{
 		this.buildContainer();
+		this.buildRouter();
+		this.configureSettings();
+	}
 
-		auto settings = new HTTPServerSettings;
-		settings.bindAddresses = ["::1", "0.0.0.0"];
-		settings.errorPageHandler = toDelegate(&errorPage);
-		settings.port = port;
+	URLRouter getRouter()
+	{
+		return this.router;
+	}
 
-		listenHTTP(settings, this.buildRouter());
+	HTTPServerSettings getSettings()
+	{
+		return this.settings;
+	}
+
+	void configureSettings()
+	{
+		this.settings = new HTTPServerSettings;
+		this.settings.bindAddresses = ["::1", "0.0.0.0"];
+		this.settings.port = port;
 	}
 
 	void buildContainer()
@@ -50,12 +61,9 @@ final class Kernel
 		}
 	}
 
-	URLRouter buildRouter()
+	void buildRouter()
 	{
-		auto router = new URLRouter;
-		router.get("*", serveStaticFiles("./public/"));
-
-		auto settings = new HTTPServerSettings;
+		this.router = new URLRouter;
 		auto webSettings = new WebInterfaceSettings;
 
 		foreach(Namespace i; TypeTupleOf!namespaces) {
@@ -70,7 +78,7 @@ final class Kernel
 						mixin(format(
 							q{
 								import Application.%s.Controller.%s;
-								router.registerWebInterface(new %s(), webSettings);
+								this.router.registerWebInterface(new %s(), webSettings);
 						 	},
 							i.bundle,
 							controller.name,
@@ -80,7 +88,7 @@ final class Kernel
 						mixin(format(
 							q{
 								import Application.%s.Controller.%s;
-								router.registerWebInterface(new %s());
+								this.router.registerWebInterface(new %s());
 							},
 							i.bundle,
 							controller.name,
@@ -90,9 +98,13 @@ final class Kernel
 				}
 
 			}
-
 		}
 
-		return router;
 	}
+
+	void boot()
+	{
+		listenHTTP(this.settings, this.router);
+	}
+
 }
