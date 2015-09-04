@@ -1,5 +1,5 @@
 # Skadi.d
-Skadi MVC Web Framework D language
+Skadi MVC Web Framework D language on top of Vibe.d
 
  ----------
 
@@ -63,3 +63,12 @@ Application/PostBundle/Controller/PostController.d  with a prefix route match "/
         public TestService testService;
    }
 ```
+
+# TODO
+
+ 1. Event Dispatcher
+ 2. Model | ORM | ODM
+ 3. Better router 
+ 4. Vendor strategy
+ 5. Logger
+ 6. Api Helper
