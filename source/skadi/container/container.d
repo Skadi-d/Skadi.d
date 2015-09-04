@@ -1,8 +1,9 @@
 /**
  * Skadi.d Web Framework
  *
- * Authors: Faianca
- * Copyright: Copyright (c) 2015 Faianca
+ * Forked from: https://github.com/mbierlee/poodinis
+ * Authors:  Mike Bierlee, Faianca
+ * Copyright: Copyright (c) 2015  Mike Bierlee, Faianca
  * License: MIT License, see LICENSE
  */
 module skadi.container.container;
