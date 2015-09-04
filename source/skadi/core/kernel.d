@@ -12,17 +12,17 @@ import std.file;
 import std.format;
 import std.traits;
 
+import config.config;
+import config.namespaces;
+import config.container;
+
+void errorPage(HTTPServerRequest req, HTTPServerResponse res, HTTPServerErrorInfo error)
+{
+	res.render!("error.dt", req, error);
+}
+
 final class Kernel
 {
-	ushort port;
-
-	this(ushort port, immutable Namespace[] skadiNamespaces, immutable Service[] skadiServices)
-	{
-		immutable Namespace[] namespaces = skadiNamespaces;
-		immutable Service[] services = skadiServices;
-		this.port = port;
-	}
-
 	void boot()
 	{
 		this.buildContainer();
@@ -37,7 +37,7 @@ final class Kernel
 	void buildContainer()
 	{
 		auto containerIoc = Container.getInstance();
-		/*foreach(Service s; TypeTupleOf!services) {
+		foreach(Service s; TypeTupleOf!services) {
 		    mixin(format(
 		        q{
 		            import %s;
@@ -46,7 +46,7 @@ final class Kernel
 		        s.path,
 		        s.className
 		    ));
-		}*/
+		}
 	}
 
 	URLRouter buildRouter()
@@ -55,7 +55,7 @@ final class Kernel
 		auto settings = new HTTPServerSettings;
 		auto webSettings = new WebInterfaceSettings;
 
-		/*foreach(Namespace i; TypeTupleOf!namespaces) {
+		foreach(Namespace i; TypeTupleOf!namespaces) {
 
 			if (i.controllers !is null) {
 				enum Controller [] controllers = i.controllers;
@@ -88,13 +88,8 @@ final class Kernel
 
 			}
 
-		}*/
+		}
 
 		return router;
 	}
-}
-
-void errorPage(HTTPServerRequest req, HTTPServerResponse res, HTTPServerErrorInfo error)
-{
-	//res.render!("error.dt", req, error);
 }

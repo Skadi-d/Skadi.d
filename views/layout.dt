@@ -1,0 +1,6 @@
+doctype html
+html
+	head
+		title Skadi Framework
+	body
+		block body
