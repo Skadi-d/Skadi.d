@@ -1,3 +1,10 @@
+/**
+	Based on https://github.com/mbierlee/poodinis
+	Package: Skadi.d
+	Copyright: © 2015 Faianca
+	License: Subject to the terms of the MIT license, as written in the included LICENSE.txt file.
+	Authors: Faianca
+*/
 module skadi.container.inject;
 
 public import skadi.container.container;
@@ -52,7 +59,7 @@ private void printDebugInjectedInstance(TypeInfo instanceType, void* instanceAdd
  */
 public void inject(Type)(shared(Container) container, Type instance)
 {
-	debug(poodinisVerbose) {
+	debug(skadiVerbose) {
 		printDebugInjectedInstance(typeid(Type), &instance);
 	}
 
@@ -85,11 +92,11 @@ private void injectMember(string member, Type)(shared(Container) container, Type
 						alias MemberElementType = ElementType!MemberType;
 						auto instances = container.resolveAll!MemberElementType;
 						__traits(getMember, instance, member) = instances;
-						debug(poodinisVerbose) {
+						debug(skadiVerbose) {
 							printDebugInjectingArray(typeid(MemberElementType), typeid(Type), &instance, member);
 						}
 					} else {
-						debug(poodinisVerbose) {
+						debug(skadiVerbose) {
 							TypeInfo qualifiedInstanceType = typeid(MemberType);
 						}
 
@@ -97,7 +104,7 @@ private void injectMember(string member, Type)(shared(Container) container, Type
 						static if (is(injectAttribute == Inject!T, T) && !is(injectAttribute.qualifier == UseMemberType)) {
 							alias QualifierType = typeof(injectAttribute.qualifier);
 							qualifiedInstance = createOrResolveInstance!(MemberType, QualifierType, assignNewInstance)(container);
-							debug(poodinisVerbose) {
+							debug(skadiVerbose) {
 								qualifiedInstanceType = typeid(QualifierType);
 							}
 						} else {
@@ -106,7 +113,7 @@ private void injectMember(string member, Type)(shared(Container) container, Type
 
 						__traits(getMember, instance, member) = qualifiedInstance;
 
-						debug(poodinisVerbose) {
+						debug(skadiVerbose) {
 							printDebugInjectingCandidate(qualifiedInstanceType, &qualifiedInstance, typeid(Type), &instance, member);
 						}
 					}

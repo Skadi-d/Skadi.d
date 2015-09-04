@@ -1,3 +1,10 @@
+/**
+	Based on https://github.com/mbierlee/poodinis
+	Package: Skadi.d
+	Copyright: © 2015 Faianca
+	License: Subject to the terms of the MIT license, as written in the included LICENSE.txt file.
+	Authors: Faianca
+*/
 module skadi.container.container;
 
 import std.string;
@@ -95,7 +102,7 @@ synchronized class Container
 		TypeInfo registeredType = typeid(SuperType);
 		TypeInfo_Class concreteType = typeid(ConcreteType);
 
-		debug(poodinisVerbose) {
+		debug(skadiVerbose) {
 			writeln(format("DEBUG: Register type %s (as %s)", concreteType.toString(), registeredType.toString()));
 		}
 
@@ -191,7 +198,7 @@ synchronized class Container
 		TypeInfo resolveType = typeid(RegistrationType);
 		TypeInfo qualifierType = typeid(QualifierType);
 
-		debug(poodinisVerbose) {
+		debug(skadiVerbose) {
 			writeln("DEBUG: Resolving type " ~ resolveType.toString() ~ " with qualifier " ~ qualifierType.toString());
 		}
 

@@ -1,3 +1,10 @@
+/**
+	Based on https://github.com/mbierlee/poodinis
+	Package: Skadi.d
+	Copyright: © 2015 Faianca
+	License: Subject to the terms of the MIT license, as written in the included LICENSE.txt file.
+	Authors: Faianca
+*/
 module skadi.container.registration;
 
 import skadi.container.interfaces;
@@ -64,7 +71,7 @@ class NullScope : CreationScope
 {
 	public Object getInstance()
 	{
-		debug(poodinisVerbose) {
+		debug(skadiVerbose) {
 			writeln("DEBUG: No instance created (NullScope)");
 		}
 		return null;
@@ -83,12 +90,12 @@ class SingleInstanceScope : CreationScope
 	public Object getInstance()
 	{
 		if (instance is null) {
-			debug(poodinisVerbose) {
+			debug(skadiVerbose) {
 				writeln(format("DEBUG: Creating new instance of type %s (SingleInstanceScope)", instantiatableType.toString()));
 			}
 			instance = instantiatableType.create();
 		} else {
-			debug(poodinisVerbose) {
+			debug(skadiVerbose) {
 				writeln(format("DEBUG: Existing instance returned of type %s (SingleInstanceScope)", instantiatableType.toString()));
 			}
 		}
@@ -118,7 +125,7 @@ class NewInstanceScope : CreationScope
 	}
 
 	public Object getInstance() {
-		debug(poodinisVerbose) {
+		debug(skadiVerbose) {
 			writeln(format("DEBUG: Creating new instance of type %s (SingleInstanceScope)", instantiatableType.toString()));
 		}
 		return instantiatableType.create();
@@ -143,7 +150,7 @@ class ExistingInstanceScope : CreationScope
 	}
 
 	public Object getInstance() {
-		debug(poodinisVerbose) {
+		debug(skadiVerbose) {
 			writeln("DEBUG: Existing instance returned (ExistingInstanceScope)");
 		}
 		return instance;
