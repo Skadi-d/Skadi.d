@@ -3,7 +3,8 @@ Skadi MVC Web Framework D language on top of Vibe.d
 
  ----------
 
-### More documentation to come. Check the Application folder for examples.
+### More documentation to come.
+Still in a early stage.
 
 Installation
 -------------------
