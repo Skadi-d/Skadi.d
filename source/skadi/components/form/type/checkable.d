@@ -1,3 +1,11 @@
+/**
+ * Skadi.d Web Framework
+ * Form Component
+
+ * Authors: Faianca
+ * Copyright: Copyright (c) 2015 Faianca
+ * License: MIT License, see LICENSE
+ */
 module skadi.components.form.type.checkable;
 
 import skadi.components.form.config;
