@@ -1,4 +1,5 @@
 module skadi.components.form.form;
+
 import skadi.components.form.formhelper;
 import skadi.components.form.formfield;
 import skadi.components.form.type.button;
@@ -166,9 +167,9 @@ abstract class Form
    string getFieldType(string type)
    {
        string fieldType = this.formHelper.getFieldType(type);
-       /*if (type == "file") {
-           this.formOptions["files"] = true;
-       }*/
+       if (type == "file") {
+           this.formOptions.files = true;
+       }
        return fieldType;
    }
 

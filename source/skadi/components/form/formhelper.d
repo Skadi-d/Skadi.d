@@ -25,8 +25,8 @@ class FormHelper
     }
 
     /**
-     * @param string $key
-     * @param string $default
+     * @param string key
+     * @param string default
      * @return mixed
      */
     string getConfig(string key, string defaults = null)
@@ -37,34 +37,34 @@ class FormHelper
     /**
      * Format the label to the proper format
      *
-     * @param $name
+     * @param name
      * @return string
      */
     string formatLabel(string name)
     {
-        return ucfirst(name.replace('_', ' '));
+        return ucfirst(name.replace("_", " "));
     }
 
     string getFieldType(string type)
     {
-       /*$types = array_keys(static::$availableFieldTypes);
-       if (!$type || trim($type) == '') {
-           throw new \InvalidArgumentException('Field type must be provided.');
+       /*types = array_keys(static::availableFieldTypes);
+       if (!type || trim(type) == "") {
+           throw new \InvalidArgumentException("Field type must be provided.");
        }
-       if (array_key_exists($type, $this->customTypes)) {
-           return $this->customTypes[$type];
+       if (array_key_exists(type, this.customTypes)) {
+           return this.customTypes[type];
        }
-       if (!in_array($type, $types)) {
+       if (!in_array(type, types)) {
            throw new \InvalidArgumentException(
                sprintf(
-                   'Unsupported field type [%s]. Available types are: %s',
-                   $type,
-                   join(', ', array_merge($types, array_keys($this->customTypes)))
+                   "Unsupported field type [%s]. Available types are: %s",
+                   type,
+                   join(", ", array_merge(types, array_keys(this.customTypes)))
                )
            );
        }
-       $namespace = __NAMESPACE__.'\\Fields\\';
-       return $namespace . static::$availableFieldTypes[$type];*/
+       namespace = __NAMESPACE__."\\Fields\\";
+       return namespace . static::availableFieldTypes[type];*/
     }
 
 protected:
