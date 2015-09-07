@@ -55,6 +55,7 @@ class FormHelper
 
     string getFieldType(string type)
     {
+        return type;
        /*types = array_keys(static::availableFieldTypes);
        if (!type || trim(type) == "") {
            throw new \InvalidArgumentException("Field type must be provided.");

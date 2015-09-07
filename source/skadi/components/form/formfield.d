@@ -59,7 +59,7 @@ protected:
     /**
      * @var string
      */
-    string[] templates;
+    string _template;
 
     /**
      * @var FormHelper
@@ -193,7 +193,7 @@ private:
      *
      * @return array
      */
-    string[][string][string] allDefaults()
+    string[string][string] allDefaults()
     {
         return [
             "wrapper" : [
@@ -221,7 +221,7 @@ private:
      */
     void setTemplate()
     {
-        this.templates = this.formHelper.getConfig(this.getTemplate(), this.getTemplate());
+        this._template = this.formHelper.getConfig(this.getTemplate(), this.getTemplate());
     }
 
 public:
@@ -290,7 +290,7 @@ public:
     string getViewTemplate()
     {
         return "test";
-        //return this.getOption("template", this.templates);
+        //return this.getOption("template", this._template);
     }
 
     /**

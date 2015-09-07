@@ -7,17 +7,18 @@
  */
 module skadi.core.kernel;
 
-import vibe.d;
-import skadi.core.container;
-import skadi.core.router;
-import skadi.utils.dynamic;
-import skadi.core.namespaces;
 import std.functional;
 import std.typetuple;
 import std.stdio;
 import std.file;
 import std.format;
 import std.traits;
+
+import vibe.d;
+import skadi.core.container;
+import skadi.core.router;
+import skadi.utils.dynamic;
+import skadi.core.namespaces;
 
 import config.config;
 import config.namespaces;
