@@ -3,7 +3,8 @@ Skadi MVC Web Framework D language on top of Vibe.d
 
  ----------
 
-### More documentation to come. Check the Application folder for examples.
+### More documentation to come.
+Still in a early stage.
 
 Installation
 -------------------
@@ -64,7 +65,9 @@ Application/PostBundle/Controller/PostController.d  with a prefix route match "/
    }
 ```
 
-# TODO
+# TODO LISt
+
+At the moment working actively on a form builder for Diet templates.
 
  1. Event Dispatcher
  2. Model | ORM | ODM
