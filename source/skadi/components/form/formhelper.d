@@ -29,9 +29,9 @@ class FormHelper
      * @param string $default
      * @return mixed
      */
-    string[] getConfig(string key, string defaults = null)
+    string getConfig(string key, string defaults = null)
     {
-        return array_get(this.config, key, defaults);
+        return this.config.get(key, defaults);
     }
 
     /**

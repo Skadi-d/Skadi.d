@@ -12,6 +12,9 @@ abstract class FormField
 {
 
 protected:
+
+    Config config;
+
     /**
      * Name of the field
      *
@@ -76,30 +79,6 @@ protected:
     bool hasDefault = false;
 
     /**
-     * @var \Closure|null
-     */
-    //clouse valueClosure = null;
-
-    /**
-     * Get the attribute value from the model by name
-     *
-     * @param mixed model
-     * @param string name
-     * @return mixed
-     */
-    /*mgetModelValueAttribute(model, name)
-    {
-        /*transformedName = this.transformKey(name);
-        if (is_string(model)) {
-            return model;
-        } elseif (is_object(model)) {
-            return object_get(model, transformedName);
-        } elseif (is_array(model)) {
-            return array_get(model, transformedName);
-        }*
-    }
-
-    /**
      * Transform array like syntax to dot syntax
      *
      * @param key
@@ -107,7 +86,7 @@ protected:
      */
     string transformKey(string key)
     {
-        return "";
+        return key;
         //return str_replace([".", "[]", "[", "]"], ["_", "", ".", ""], key);
     }
 
@@ -254,20 +233,22 @@ public:
         this.setTemplate();
         this.setDefaultOptions(options);
         this.setupValue();
+
+        this.config = Config("wrapper");
     }
 
 /**
    * Get single option from options array. Can be used with dot notation ('attr.class')
    *
    * @param        $option
-   * @param mixed  $default
+   * @param string  $default
    *
    * @return mixed
    */
-  string getOption(string option, string[] defaults = null)
+  string getOption(string option, string defaults = null)
   {
-      return "sdada";
-      //return array_get(this.options, option, defaults);
+      return "real_name";
+      //return this.options.get(option, defaults);
   }
 
     void setupValue()
@@ -300,7 +281,8 @@ public:
      */
     string getViewTemplate()
     {
-        return this.getOption("template", this.templates);
+        return "test";
+        //return this.getOption("template", this.templates);
     }
 
     /**
@@ -464,7 +446,7 @@ public:
     /**
      * Default options for field
      *
-     * @return array
+     * @return Config
      */
     Config getDefaults()
     {

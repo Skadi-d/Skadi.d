@@ -1,4 +1,4 @@
-module skadi.components.form.type.button;
+module skadi.components.form.type.checkable;
 
 import skadi.components.form.config;
 import skadi.components.form.form;
@@ -35,4 +35,5 @@ protected:
     {
         return Config(null, ["type" : this.type ]);
     }
+
 }
