@@ -1,15 +1,28 @@
 module skadi.components.form.form;
 import skadi.components.form.formhelper;
 import skadi.components.form.formfield;
+import skadi.components.form.type.button;
+
+struct FormOption
+{
+    string name;
+    string value;
+}
+
+struct FormOptions
+{
+    string method = "GET";
+    string real_name;
+    string label;
+    string url;
+    bool files = false;
+}
 
 abstract class Form
 {
     this()
     {
-        this.formOptions = [
-            "method" : "GET",
-            "url" : null
-        ];
+        this.formOptions = FormOptions("GET");
     }
 
     void buildForm()
@@ -30,7 +43,7 @@ abstract class Form
     /**
      * Rebuild the form from scratch
      *
-     * @return $this
+     * @return this
      */
     void rebuildForm()
     {
@@ -39,7 +52,7 @@ abstract class Form
         // If form is plain, buildForm method is empty, so we need to take
         // existing fields and add them again
         foreach (string name, FormField field; this.fields) {
-            this.add(name, field.getType(), field.getOptions());
+            this.add(name, field.getOptions(), field.getType());
         }
 
         this.rebuilding = false;
@@ -48,59 +61,61 @@ abstract class Form
     /**
      * Create a new field and add it to the form
      *
-     * @param string $name
-     * @param string $type
-     * @param array  $options
-     * @param bool   $modify
-     * @return $this
+     * @param string name
+     * @param string type
+     * @param FormOptions options
+     * @param bool   modify
+     * @return this
      */
-    Form add(string name, string type = "text", string[string] options = ["method":"GET"], bool modify = false)
+    Form add(string name, FormOptions options, string type = "text", bool modify = false)
     {
         if (this.rebuilding && !this.has(name)) {
             return this;
         }
-        this.addField(this.makeField(name, type, options), modify);
+
+        this.addField(this.makeField(name, options, type), modify);
         return this;
     }
 
     /**
      * Create the FormField object
      *
-     * @param string $name
-     * @param string $type
-     * @param array  $options
+     * @param string name
+     * @param string type
+     * @param array  options
      * @return FormField
      */
-    FormField makeField(string name, string type = "text", string[string] options = ["method":"GET"])
+    FormField makeField(string name, FormOptions options, string type = "text")
     {
         this.setupFieldOptions(name, options);
         auto fieldName = this.getFieldName(name);
         auto fieldType = this.getFieldType(type);
 
-        return new FormField(fieldName, type, this, options);
+        return new ButtonType(fieldName, type, this, options);
     }
 
     /**
     * Set up options on single field depending on form options
     *
-    * @param string $name
-    * @param $options
+    * @param string name
+    * @param FormOptions options
     */
-   void setupFieldOptions(string name, string[string] options)
+   void setupFieldOptions(string name, FormOptions options)
    {
-       options["real_name"] = name;
+       options.real_name = name;
        if (!this.getName()) {
            return;
        }
-       /*if (!isset($options['label'])) {
-           $options['label'] = $this->formHelper->formatLabel($name);
-       }*/
+
+       if (options.label) {
+           options.label = this.formHelper.formatLabel(name);
+       }
    }
 
    /**
     * If form is named form, modify names to be contained in single key (parent[child_field_name])
     *
-    * @param string $name
+    * @param string name
     * @return string
     */
    string getFieldName(string name)
@@ -134,7 +149,7 @@ abstract class Form
     /**
     * Add a FormField to the form's fields
     *
-    * @param FormField $field
+    * @param FormField field
     */
     void addField(FormField field, bool modify = false)
     {
@@ -160,7 +175,7 @@ abstract class Form
     /**
     * Check if form has field
     *
-    * @param $name
+    * @param name
     * @return bool
     */
    bool has(string name)
@@ -179,7 +194,7 @@ abstract class Form
     /**
      * Prevent adding fields with same name
      *
-     * @param string $name
+     * @param string name
      */
     void preventDuplicate(string name)
     {
@@ -206,12 +221,12 @@ protected:
     /**
     * Form options
     *
-    * @var array
+    * @var FormOptions
     */
-    string[string] formOptions;
+    FormOptions formOptions;
 
     /**
-     * Should errors for each field be shown when called form($form) or form_rest($form) ?
+     * Should errors for each field be shown when called form(form) or form_rest(form) ?
      *
      * @var bool
      */

@@ -1,5 +1,12 @@
 module skadi.components.form.config;
 
+struct Config
+{
+     string wrapper;
+     string[string] attr;
+}
+
+
 string[string] getDefaultConfig()
 {
     string[string] formDefaults;
@@ -32,6 +39,6 @@ string[string] getForms()
     forms["collection"] = "form-group";
     forms["static"] = "form-group";
 
-    
+
     return forms;
 }

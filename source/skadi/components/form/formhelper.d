@@ -1,5 +1,9 @@
 module skadi.components.form.formhelper;
 
+import skadi.components.string.transform;
+
+import std.array;
+
 class FormHelper
 {
 
@@ -30,8 +34,19 @@ class FormHelper
         return array_get(this.config, key, defaults);
     }
 
-   string getFieldType(string type)
-   {
+    /**
+     * Format the label to the proper format
+     *
+     * @param $name
+     * @return string
+     */
+    string formatLabel(string name)
+    {
+        return ucfirst(name.replace('_', ' '));
+    }
+
+    string getFieldType(string type)
+    {
        /*$types = array_keys(static::$availableFieldTypes);
        if (!$type || trim($type) == '') {
            throw new \InvalidArgumentException('Field type must be provided.');
@@ -50,7 +65,7 @@ class FormHelper
        }
        $namespace = __NAMESPACE__.'\\Fields\\';
        return $namespace . static::$availableFieldTypes[$type];*/
-   }
+    }
 
 protected:
     string view;

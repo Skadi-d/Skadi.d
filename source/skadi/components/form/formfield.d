@@ -2,12 +2,13 @@ module skadi.components.form.formfield;
 
 import skadi.components.form.form;
 import skadi.components.form.formhelper;
+import skadi.components.form.config;
 import std.array;
 
 /**
  * Class FormField
  */
-class FormField
+abstract class FormField
 {
 
 protected:
@@ -28,9 +29,9 @@ protected:
     /**
      * All options for the field
      *
-     * @var
+     * @var FormOptions
      */
-    string[string] options;
+    FormOptions options;
 
     /**
      * Is field rendered
@@ -116,7 +117,7 @@ protected:
      * @param array options
      * @return array
      */
-    string[] prepareOptions(string[] options)
+    FormOptions prepareOptions(FormOptions options)
     {
         /*helper = this.formHelper;
         this.options = helper.mergeOptions(this.options, options);
@@ -177,7 +178,7 @@ protected:
      *
      * @param array options
      */
-    void setDefaultOptions(string[string] options)
+    void setDefaultOptions(FormOptions options)
     {
         /*this.options = this.formHelper.mergeOptions(this.allDefaults(), this.getDefaults());
         this.options = this.prepareOptions(options);*/
@@ -244,7 +245,7 @@ public:
      * @param Form        parent
      * @param array       options
      */
-    this(string name, string type, Form parent, string[string] options)
+    this(string name, string type, Form parent, FormOptions options)
     {
         this.name = name;
         this.type = type;
@@ -263,9 +264,9 @@ public:
    *
    * @return mixed
    */
-  string[] getOption(string[] option, string defaults = null)
+  string getOption(string option, string[] defaults = null)
   {
-      return ["sdada"];
+      return "sdada";
       //return array_get(this.options, option, defaults);
   }
 
@@ -303,14 +304,15 @@ public:
     }
 
     /**
-     * @param array options
+     * @param FormOptions options
      * @param bool  showLabel
      * @param bool  showField
      * @param bool  showError
      * @return string
      */
-    string render(string[string] options, bool showLabel = true, bool showField = true, bool showError = true)
+    string render(FormOptions options, bool showLabel = true, bool showField = true, bool showError = true)
     {
+        return "html";
         /*this.prepareOptions(options);
         value = this.getValue();
         defaultValue = this.getDefaultValue();
@@ -376,9 +378,9 @@ public:
     /**
      * Get field options
      *
-     * @return array
+     * @return FormOptions
      */
-    string[string] getOptions()
+    FormOptions getOptions()
     {
         return this.options;
     }
@@ -401,7 +403,7 @@ public:
      *
      * @param array options
      */
-    void setOptions(string[string] options)
+    void setOptions(FormOptions options)
     {
         this.options = this.prepareOptions(options);
     }
@@ -464,11 +466,10 @@ public:
      *
      * @return array
      */
-    string[string] getDefaults()
+    Config getDefaults()
     {
-        return [];
+        return this.config;
     }
-
 
     /**
      * Get real name of the field without form namespace
