@@ -9,9 +9,19 @@ Still in a early stage.
 Installation
 -------------------
 
+#### OS X
 
 ```
-  git clone https://github.com/Faianca/Skadi.d.git 
+brew install dub
+brew install libevent
+brew install mongodb
+```
+
+#### Run
+
+
+```
+  git clone https://github.com/Faianca/Skadi.d.git
 ```
 ```
   cd Skadi.d
@@ -25,12 +35,12 @@ Config
 
 At the source/config folder you have a few config files.
 
-##### Config.d 
+##### Config.d
   - Configure Port
-  
+
 ##### Namespaces.d
- - To register a new bundle 
- 
+ - To register a new bundle
+
   ```
  enum Namespace[] namespaces = [
 	    Namespace("PostBundle", [
@@ -55,7 +65,7 @@ Application/PostBundle/Controller/PostController.d  with a prefix route match "/
 
 ##### Services.d
  - To register new services
-  
+
   To inject them
 
 ```
@@ -65,13 +75,13 @@ Application/PostBundle/Controller/PostController.d  with a prefix route match "/
    }
 ```
 
-# TODO LISt
+# TODO LIST
 
 At the moment working actively on a form builder for Diet templates.
 
  1. Event Dispatcher
  2. Model | ORM | ODM
- 3. Better router 
+ 3. Better router
  4. Vendor strategy
  5. Logger
  6. Api Helper
