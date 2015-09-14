@@ -40,8 +40,8 @@ class PostController : SkadiController
 			"test4"
 		];
 
-		return serializeToJson(test);
-		//return postManager.getPost();
+		//return serializeToJson(test);
+		return postManager.getPost();
 	}
 
 	@path("/name/:name")
