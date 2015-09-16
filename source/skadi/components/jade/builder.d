@@ -1,3 +1,11 @@
+/**
+ * Skadi.d Web Framework
+ * Validation Component
+
+ * Authors: Faianca
+ * Copyright: Copyright (c) 2015 Faianca
+ * License: MIT License, see LICENSE
+ */
 module skadi.components.jade.builder;
 
 import std.stdio;
