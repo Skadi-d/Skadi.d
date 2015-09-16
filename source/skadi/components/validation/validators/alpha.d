@@ -6,7 +6,7 @@
  * Copyright: Copyright (c) 2015 Faianca
  * License: MIT License, see LICENSE
  */
-module skadi.components.validation.validators.email;
+module skadi.components.validation.validators.alpha;
 
 import skadi.components.validation.validatorInterface;
 import skadi.components.validation.validation;
@@ -14,30 +14,30 @@ import skadi.components.validation.validator;
 import skadi.components.validation.message;
 
 import std.string;
-import std.regex;
-import std.stdio;
+import std.ascii;
+import std.algorithm;
 
 /**
- * Checks if a value has a correct e-mail format
+ * Check for alphabetic character(s)
 
  * Check Unittests for examples at the bottom of the file.
  */
-struct EmailOptions
+struct AlphaOptions
 {
 	string label;
 	bool allowEmpty = false;
 	string message;
 }
 
-class Email : Validator
+class Alpha : Validator
 {
 
-	protected EmailOptions _options;
+	protected AlphaOptions _options;
 
 	/**
 	 * constructor
 	 */
-	this(EmailOptions options)
+	this(AlphaOptions options)
 	{
 		this._options = options;
 	}
@@ -51,7 +51,7 @@ class Email : Validator
 			return true;
 		}
 
-		return this.validateEmail(value);
+		return all!isAlpha(value);
 	}
 
 
@@ -66,7 +66,7 @@ class Email : Validator
 			return true;
 		}
 
-		if (!this.validateEmail(value)) {
+		if (!all!isAlpha(value)) {
 
 			string label = (this._options.label.length == 0)
 							? validation.getLabel(field)
@@ -75,24 +75,16 @@ class Email : Validator
 			string message = this._options.message;
 
 			if (message.length == 0) {
-				message = validation.getDefaultMessage("Email");
+				message = validation.getDefaultMessage("Alpha");
 			}
 
-			validation.appendMessage(new Message(format(message, label), field, "Email"));
+			validation.appendMessage(new Message(format(message, label), field, "Alpha"));
 			return false;
 		}
 
 		return true;
 	}
 
-	/**
-	*  Simple Regex
-	**/
-	private bool validateEmail(string value)
-	{
-		auto t = match(value, regex(`(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)`));
-		return !t.empty;
-	}
 }
 
 unittest
@@ -101,15 +93,15 @@ unittest
 
 	auto validation = new Validation();
 
-	auto options = EmailOptions();
+	auto options = AlphaOptions();
 
-	Email test = new Email(options);
-	assert(test.validate(validation, "test") == false);
-	assert(test.validate(validation, "jorgefaianca@gmail.com") == true);
+	Alpha test = new Alpha(options);
+	assert(test.validate(validation, "test") == true);
+	assert(test.validate(validation, "1") == false);
 
-	test = new Email(options);
-	assert(test.validate("jorgefaianca@gmail.") == false);
-	assert(test.validate("jorgefaianca.gmail.com") == false);
-	assert(test.validate(validation, "teste@test.com") == true);
+	test = new Alpha(options);
+	assert(test.validate("jorgefaiancagmail") == true);
+	assert(test.validate("123213123") == false);
+	assert(test.validate(validation, "321.23") == false);
 
 }

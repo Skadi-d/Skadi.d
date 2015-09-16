@@ -6,7 +6,7 @@
  * Copyright: Copyright (c) 2015 Faianca
  * License: MIT License, see LICENSE
  */
-module skadi.components.validation.validators.email;
+module skadi.components.validation.validators.digit;
 
 import skadi.components.validation.validatorInterface;
 import skadi.components.validation.validation;
@@ -14,30 +14,31 @@ import skadi.components.validation.validator;
 import skadi.components.validation.message;
 
 import std.string;
-import std.regex;
+import std.ascii;
 import std.stdio;
+import std.conv;
 
 /**
  * Checks if a value has a correct e-mail format
 
  * Check Unittests for examples at the bottom of the file.
  */
-struct EmailOptions
+struct DigitOptions
 {
 	string label;
 	bool allowEmpty = false;
 	string message;
 }
 
-class Email : Validator
+class Digit : Validator
 {
 
-	protected EmailOptions _options;
+	protected DigitOptions _options;
 
 	/**
 	 * constructor
 	 */
-	this(EmailOptions options)
+	this(DigitOptions options)
 	{
 		this._options = options;
 	}
@@ -51,7 +52,7 @@ class Email : Validator
 			return true;
 		}
 
-		return this.validateEmail(value);
+		return isNumeric(value);
 	}
 
 
@@ -66,7 +67,7 @@ class Email : Validator
 			return true;
 		}
 
-		if (!this.validateEmail(value)) {
+		if (!isNumeric(value)) {
 
 			string label = (this._options.label.length == 0)
 							? validation.getLabel(field)
@@ -75,24 +76,16 @@ class Email : Validator
 			string message = this._options.message;
 
 			if (message.length == 0) {
-				message = validation.getDefaultMessage("Email");
+				message = validation.getDefaultMessage("Digit");
 			}
 
-			validation.appendMessage(new Message(format(message, label), field, "Email"));
+			validation.appendMessage(new Message(format(message, label), field, "Digit"));
 			return false;
 		}
 
 		return true;
 	}
 
-	/**
-	*  Simple Regex
-	**/
-	private bool validateEmail(string value)
-	{
-		auto t = match(value, regex(`(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)`));
-		return !t.empty;
-	}
 }
 
 unittest
@@ -101,15 +94,15 @@ unittest
 
 	auto validation = new Validation();
 
-	auto options = EmailOptions();
+	auto options = DigitOptions();
 
-	Email test = new Email(options);
+	Digit test = new Digit(options);
 	assert(test.validate(validation, "test") == false);
-	assert(test.validate(validation, "jorgefaianca@gmail.com") == true);
+	assert(test.validate(validation, "1") == true);
 
-	test = new Email(options);
+	test = new Digit(options);
 	assert(test.validate("jorgefaianca@gmail.") == false);
-	assert(test.validate("jorgefaianca.gmail.com") == false);
-	assert(test.validate(validation, "teste@test.com") == true);
+	assert(test.validate("123213123") == true);
+	assert(test.validate(validation, "321.23") == true);
 
 }
