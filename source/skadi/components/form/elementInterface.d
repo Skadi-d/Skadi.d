@@ -9,9 +9,12 @@
 module skadi.components.form.elementInterface;
 
 import skadi.components.form.form;
+import skadi.components.validation.validatorInterface;
 
 interface ElementInterface
 {
+
+	ValidatorInterface[] getValidators();
 
 	/**
 	 * Sets the parent form to the element

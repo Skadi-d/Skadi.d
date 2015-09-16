@@ -15,23 +15,33 @@ void errorPage(HTTPServerRequest req, HTTPServerResponse res, HTTPServerErrorInf
 
 shared static this()
 {
-	/*import skadi.components.form.form;
+	import skadi.components.form.form;
 	import skadi.components.form.elements.text;
 	import skadi.components.validation.validators.stringlength;
 	import skadi.components.validation.validation;
 
 	auto form = new Form();
 
-	form.add(
-			new Text("name")
-			.addFilter("test")
-	);
+	auto text = new Text("name");
+	auto options = StringOptions();
+		 options.min = 1;
+		 options.max = 50;
+	text.addValidator(new StringLength(options));
 
-	writeln(form.render("name"));*/
-	auto kernel = new Kernel();
+	form.add(text);
+
+	string[string] testinput = ["name": "a"];
+
+	if ( form.isValid(testinput) ) {
+		writeln("YYYYYYYESSS");
+	} else {
+		writeln("ERROR!");
+	}
+
+	/*auto kernel = new Kernel();
 	kernel.getSettings().errorPageHandler = toDelegate(&errorPage);
 
 	// Assets
 	kernel.getRouter().get("*", serveStaticFiles("./public/"));
-	kernel.boot();
+	kernel.boot();*/
 }

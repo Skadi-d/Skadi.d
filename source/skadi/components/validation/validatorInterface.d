@@ -15,5 +15,5 @@ interface ValidatorInterface
 	/**
 	 * Executes the validation
 	 */
-	bool validate(Validation validation, string attribute = null);
+	bool validate(Validation validation, string field = null);
 }
