@@ -8,3 +8,4 @@
 module config.config;
 
 enum port = 8080;
+enum bindAddresses = ["::1", "0.0.0.0"];

@@ -47,13 +47,19 @@ final class Kernel
 		return this.settings;
 	}
 
+	/**
+	* Configure Http Settings settings
+	**/
 	void configureSettings()
 	{
 		this.settings = new HTTPServerSettings;
-		this.settings.bindAddresses = ["::1", "0.0.0.0"];
+		this.settings.bindAddresses = bindAddresses;
 		this.settings.port = port;
 	}
 
+	/**
+	* Register our services.
+	**/
 	void buildContainer()
 	{
 		auto containerIoc = Container.getInstance();

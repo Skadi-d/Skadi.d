@@ -6,6 +6,9 @@
  * License: MIT License, see LICENSE
  */
 import skadi.framework;
+import skadi.components.form.form;
+import skadi.components.form.elements.text;
+import std.stdio;
 
 void errorPage(HTTPServerRequest req, HTTPServerResponse res, HTTPServerErrorInfo error)
 {
@@ -14,6 +17,16 @@ void errorPage(HTTPServerRequest req, HTTPServerResponse res, HTTPServerErrorInf
 
 shared static this()
 {
+	/*import skadi.components.validation.validators.stringlength;
+	import skadi.components.validation.validation;
+
+	auto form = new Form();
+
+	form.add(
+			new Text("name")
+				.addFilter("test")
+	);*/
+
 	auto kernel = new Kernel();
 	kernel.getSettings().errorPageHandler = toDelegate(&errorPage);
 
