@@ -137,7 +137,7 @@ unittest
 		 options.max = 10;
 
 	StringLength test = new StringLength(options);
-	assert(test.validate(validation, "test") == true);
+    assert(test.validate(validation, "test") == true);
 	assert(test.validate(validation, "testtesttesttestetetetetetete") == false);
 	assert(validation.isValid() == false);
 
