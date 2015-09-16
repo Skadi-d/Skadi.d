@@ -83,7 +83,7 @@ final class Kernel
 		foreach(Namespace i; TypeTupleOf!namespaces) {
 
 			if (i.controllers !is null) {
-				enum Controller [] controllers = i.controllers;
+				enum Controller[] controllers = i.controllers;
 
 				foreach(Controller controller; TypeTupleOf!controllers)
 				{

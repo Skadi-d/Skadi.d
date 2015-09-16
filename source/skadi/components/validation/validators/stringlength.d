@@ -37,7 +37,7 @@ struct StringOptions
 class StringLength : Validator
 {
 
-    protected StringOptions _options;
+	protected StringOptions _options;
 
 	/**
 	 * constructor
@@ -52,7 +52,7 @@ class StringLength : Validator
 		bool valid = false;
 		string value = field;
 
-        if (!this._options.min && !this._options.max) {
+		if (!this._options.min && !this._options.max) {
 			throw new Exception("A minimum or maximum must be set");
 		}
 
@@ -72,8 +72,8 @@ class StringLength : Validator
 			valid = (field.length <= this._options.max);
 		}
 
-        return valid;
-    }
+		return valid;
+	}
 
 	/**
 	 * Executes the validation
@@ -87,7 +87,7 @@ class StringLength : Validator
 						? validation.getLabel(field)
 						: this._options.label;
 
-        if (!this._options.min && !this._options.max) {
+		if (!this._options.min && !this._options.max) {
 			throw new Exception("A minimum or maximum must be set");
 		}
 
@@ -123,7 +123,7 @@ class StringLength : Validator
 			}
 		}
 
-        return valid;
+		return valid;
 	}
 }
 
@@ -137,7 +137,7 @@ unittest
 		 options.max = 10;
 
 	StringLength test = new StringLength(options);
-    assert(test.validate(validation, "test") == true);
+	assert(test.validate(validation, "test") == true);
 	assert(test.validate(validation, "testtesttesttestetetetetetete") == false);
 	assert(validation.isValid() == false);
 

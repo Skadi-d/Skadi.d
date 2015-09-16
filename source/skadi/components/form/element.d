@@ -143,7 +143,7 @@ public:
 	/**
 	 * Magic method __toString renders the widget without atttributes
 	 */
-	string toString()
+	override string toString()
 	{
 		return "teste :D";
 	}
