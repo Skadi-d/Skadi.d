@@ -137,22 +137,22 @@ unittest
 		 options.max = 10;
 
 	StringLength test = new StringLength(options);
-    assert(test.validate(validation, "test") == true);
-    assert(test.validate(validation, "testtesttesttestetetetetetete") == false);
+	assert(test.validate(validation, "test") == true);
+	assert(test.validate(validation, "testtesttesttestetetetetetete") == false);
 	assert(validation.isValid() == false);
 
 	///// SIMPLE
 
-    test = new StringLength(StringOptions(2,50));
-    assert(test.validate("test") == true);
-    assert(test.validate("t") == false);
+	test = new StringLength(StringOptions(2,50));
+	assert(test.validate("test") == true);
+	assert(test.validate("t") == false);
 
 	options = StringOptions();
 		 options.max = 10;
 
 	test = new StringLength(options);
-    assert(test.validate("test") == true);
-    assert(test.validate("testtesttesttestetetetetetete") == false);
+	assert(test.validate("test") == true);
+	assert(test.validate("testtesttesttestetetetetetete") == false);
 
 	options = StringOptions();
 		 options.allowEmpty = true;
@@ -160,8 +160,8 @@ unittest
 		 options.min = 2;
 
 	test = new StringLength(options);
-    assert(test.validate("") == true);
+	assert(test.validate("") == true);
 	assert(test.validate("test") == true);
-    assert(test.validate("testtesttesttestetetetetetete") == false);
-    assert(test.validate("t") == false);
+	assert(test.validate("testtesttesttestetetetetetete") == false);
+	assert(test.validate("t") == false);
 }
