@@ -20,9 +20,30 @@ import skadi.core.router;
 import skadi.utils.dynamic;
 import skadi.core.namespaces;
 
-import config.config;
-import config.namespaces;
-import config.container;
+static if(__traits(compiles, {
+	import config.config;
+})) {
+  import config.config;
+} else {
+	enum port = 8080;
+	enum bindAddresses = ["::1", "0.0.0.0"];
+}
+
+static if(__traits(compiles, {
+	import config.namespaces;
+})) {
+  import config.namespaces;
+} else {
+	enum Namespace[] namespaces = [];
+}
+
+static if(__traits(compiles, {
+	import config.container;
+})) {
+  import config.container;
+} else {
+	enum Service[] services = [];
+}
 
 
 final class Kernel
