@@ -39,6 +39,11 @@ public:
         return (this._messages.length == 0);
     }
 
+	MessageInterface[] getMessages()
+	{
+		return this._messages;
+	}
+
 	/**
 	 * Filters the message group by field name
 	 */

@@ -28,7 +28,7 @@ class Text : Element
 	 */
 	string render()
 	{
-		return "text";
+		return "input.(name='"~ this._name ~"' value='"~ this._value ~"')";
 	}
 
 }

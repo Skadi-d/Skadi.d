@@ -9,10 +9,7 @@
 module skadi.components.form.form;
 
 import skadi.components.form.elementInterface;
-import skadi.components.validation.messagelist;
-import skadi.components.validation.validation;
-import skadi.components.validation.validatorInterface;
-import skadi.components.validation.validator;
+import skadi.components.validation.all;
 
 
 
@@ -20,7 +17,7 @@ class Form
 {
 
 protected:
-    MessageList[] _messages;
+    MessageList _messages;
     ElementInterface[string] _elements;
 
 public:
@@ -48,9 +45,9 @@ public:
     /**
 	 * Returns the messages generated in the validation
 	 */
-	MessageList[] getMessages()
+	MessageInterface[] getMessages()
 	{
-		return this._messages;
+		return this._messages.getMessages();
 	}
 
     /**
@@ -77,16 +74,16 @@ public:
         import std.stdio;
         auto validation = new Validation();
 
-        foreach(key, value; data) {
-            if (key in this._elements) {
-                ValidatorInterface[] validators = this._elements[key].getValidators();
+        foreach(field, value; data) {
+            if (field in this._elements) {
+                ValidatorInterface[] validators = this._elements[field].getValidators();
                 foreach(ValidatorInterface validator; validators) {
                     validator.validate(validation, value); // noticeee
                 }
             }
         }
-
-		return validation.getMessages().isEmpty();
+        this._messages = validation.getMessages();
+		return this._messages.isEmpty();
 	}
 
 }

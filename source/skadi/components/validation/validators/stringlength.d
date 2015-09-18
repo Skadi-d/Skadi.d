@@ -104,6 +104,7 @@ class StringLength : Validator
 				if (message.length == 0) {
 					message = validation.getDefaultMessage("TooShort");
 				}
+
 				validation.appendMessage(new Message(format(message, label, this._options.min), field, "TooShort"));
 				return false;
 			}

@@ -56,6 +56,7 @@ class Alpha : Validator
 
 
 	/**
+	*  For the form component
 	 * Executes the validation
 	 */
 	override bool validate(Validation validation, string field = null)

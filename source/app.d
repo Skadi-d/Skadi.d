@@ -6,6 +6,8 @@
  * License: MIT License, see LICENSE
  */
 import skadi.framework;
+import Application.PostBundle.Forms.contactform;
+
 import std.stdio;
 
 void errorPage(HTTPServerRequest req, HTTPServerResponse res, HTTPServerErrorInfo error)
@@ -15,27 +17,21 @@ void errorPage(HTTPServerRequest req, HTTPServerResponse res, HTTPServerErrorInf
 
 shared static this()
 {
-	import skadi.components.form.form;
-	import skadi.components.form.elements.text;
-	import skadi.components.validation.validators.stringlength;
-	import skadi.components.validation.validation;
+	auto form = new ContactForm();
 
-	auto form = new Form();
+	string[string] testinput = ["name": "11"];
 
-	auto text = new Text("name");
-	auto options = StringOptions();
-		 options.min = 1;
-		 options.max = 50;
-	text.addValidator(new StringLength(options));
-
-	form.add(text);
-
-	string[string] testinput = ["name": "a"];
+	writeln(form.render("name"));
 
 	if ( form.isValid(testinput) ) {
 		writeln("YYYYYYYESSS");
 	} else {
-		writeln("ERROR!");
+		foreach(message; form.getMessages()) {
+			writeln(message.getField());
+			writeln(message.getType());
+			writeln(message.getMessage());
+		}
+
 	}
 
 	/*auto kernel = new Kernel();

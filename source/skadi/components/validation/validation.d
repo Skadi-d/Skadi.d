@@ -25,7 +25,7 @@ protected:
     enum string[string] _defaultMessages = [
        "Alnum": "Field %s must contain only letters and numbers",
        "Alpha": "Field %s must contain only letters",
-       "Between": "Field %s must be within the range of %d to :max",
+       "Range": "Field %s must be within the range of %d to %d",
        "Confirmation": "Field %s must be the same as :with",
        "Digit": "Field %s must be numeric",
        "Email": "Field %s must be an email address",
