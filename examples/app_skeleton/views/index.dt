@@ -1,0 +1,11 @@
+extends layout
+
+block body
+ .container
+  .row
+   .col-lg-6.col-md-6
+    include partial/index_post
+    // Pager
+    ul.pager
+     li.next
+      a(href='#') Older Posts →

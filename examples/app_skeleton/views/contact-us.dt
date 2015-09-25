@@ -1,0 +1,6 @@
+extends layout
+
+block body
+    form(action="", method="GET")
+        !{form.render("name")}
+        input(type='submit', value='esafdds')

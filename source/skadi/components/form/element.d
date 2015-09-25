@@ -26,6 +26,7 @@ protected:
 	ValidatorInterface[] _validators;
 
 public:
+
 	/**
 	 * @param string name
 	 * @param array attributes

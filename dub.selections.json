@@ -6,6 +6,7 @@
 		"libevent": "2.0.1+2.0.16",
 		"openssl": "1.1.4+1.0.1g",
 		"libev": "5.0.0+4.04",
+		"mysql-native": "0.1.3",
 		"libasync": "0.7.5"
 	}
 }

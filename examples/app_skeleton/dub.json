@@ -1,0 +1,11 @@
+{
+	"name": "skadi-d skeleton",
+	"description": "Skadi.d MVC Web Framework D language.",
+	"license": "MIT",
+	"copyright": "Copyright © 2015, faianca",
+	"authors": ["faianca"],
+	"dependencies": {
+		"skadi-d": {"version": "~master", "path": "../../"} 
+	},
+    "versions": ["VibeDefaultMain"]
+}

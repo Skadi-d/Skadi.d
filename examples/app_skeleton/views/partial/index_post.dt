@@ -1,0 +1,13 @@
+- import std.algorithm : min;
+- foreach( i; 0 .. 4 )
+  .post-preview
+    a(href='/post/1')
+      h2.post-title
+        | #{i} Man must explore, and this is exploration at its greatest
+      h3.post-subtitle
+        | Problems look mighty small from 150 miles up
+    p.post-meta
+      | Posted by
+      a(href='#') #{author}
+      |  on September 24, 2014
+  hr
