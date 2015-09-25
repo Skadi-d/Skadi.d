@@ -6,6 +6,5 @@
 	"authors": ["faianca"],
 	"dependencies": {
 		"skadi-d": {"version": "~master", "path": "../../"} 
-	},
-    "versions": ["VibeDefaultMain"]
+	}
 }
